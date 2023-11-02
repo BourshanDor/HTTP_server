@@ -1,14 +1,15 @@
 import socket
 
-OK = b'HTTP/1.1 200 OK\r\n\r\n'
-NOT_FOUND = b'HTTP/1.1 404 Not Found\r\n\r\n'
+OK = b'HTTP/1.1 200 OK\r\n'
+NOT_FOUND = b'HTTP/1.1 404 Not Found\r\n'
+END = b'\r\n'
 
 def build_response(content : str) -> bytes : 
     text = content[6:]
     content_length = len(text)
     text = text.encode()
     content_length = f'Content-Length: {content_length}\r\n\r\n'.encode()
-    message = b'HTTP/1.1 200 OK\r\n' + b'Content-Type: text/plain\r\n' + content_length +  text + b'\r\n'
+    message = OK + b'Content-Type: text/plain\r\n' + content_length +  text + END
     return message
 
 
@@ -25,12 +26,12 @@ def main():
         lines = data.decode("utf-8").splitlines()
         first_line = lines[0].split()
         if len(first_line) == 3 and first_line[1] == '/' : 
-            conn.send(OK)
+            conn.send(OK + END)
         elif len(first_line) == 3 and '/echo' in first_line[1] :
             message = build_response(first_line[1]) 
             conn.send(message)
         else : 
-            conn.send(NOT_FOUND)
+            conn.send(NOT_FOUND + END)
         
 
         
