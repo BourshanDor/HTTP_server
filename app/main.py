@@ -7,7 +7,7 @@ def build_response(content : str) -> bytes :
     text = content[6:]
     content_length = len(text)
     text = text.encode()
-    content_length = f'Content-Length: {content_length}\r\n'.encode()
+    content_length = f'Content-Length: {content_length}\r\n\r\n'.encode()
     message = OK + b'Content-Type: text/plain\r\n' + content_length +  text + b'\r\n'
     return message
 
