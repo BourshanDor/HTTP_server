@@ -21,14 +21,14 @@ def main():
         
         data = conn.recv(1024)
         if b'HTTP' not in data : 
-            return 
-        print('a')
+            return  
         lines = data.decode("utf-8").splitlines()
         first_line = lines[0].split()
         if len(first_line) == 3 and first_line[1] == '/' : 
             conn.send(OK)
         elif len(first_line) == 3 and '/echo' in first_line[1] :
             message = build_response(first_line[1]) 
+            print(message.decode())
             conn.send(message)
         else : 
             conn.send(NOT_FOUND)
