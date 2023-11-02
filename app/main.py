@@ -1,5 +1,8 @@
 import socket
 
+OK = b'HTTP/1.1 200 OK\r\n\r\n'
+NOT_FOUND = b'HTTP/1.1 200 OK\r\n\r\n'
+
 
 def main():
 
@@ -7,7 +10,17 @@ def main():
     conn, addr = server_socket.accept() 
     with conn : 
         data = conn.recv(1024)
-        conn.send(b'HTTP/1.1 200 OK\r\n\r\n')
+        if b'HTTP' not in data : 
+            return 
+        lines = data.decode("utf-8").splitlines()
+        first_line = lines[0].split()
+        if len(first_line) == 3 and first_line[1][0] == '/' : 
+            conn.send(OK)
+        else : 
+            conn.send(NOT_FOUND)
+
+
+        
 
     
 
