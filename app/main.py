@@ -14,7 +14,7 @@ def main():
             return 
         lines = data.decode("utf-8").splitlines()
         first_line = lines[0].split()
-        if len(first_line) == 3 and first_line[1][0] == '/' : 
+        if len(first_line) == 3 and len(first_line[1]) ==1 and first_line[1][0] == '/' : 
             conn.send(OK)
         else : 
             conn.send(NOT_FOUND)
