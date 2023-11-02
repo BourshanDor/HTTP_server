@@ -1,6 +1,6 @@
 import socket
 
-OK = b'HTTP/1.1 200 OK\r\n\r\n'
+OK = b'HTTP/1.1 200 OK\r\n'
 NOT_FOUND = b'HTTP/1.1 404 Not Found\r\n\r\n'
 
 def build_response(content : str) -> bytes : 
