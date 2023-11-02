@@ -4,9 +4,9 @@ OK = b'HTTP/1.1 200 OK\r\n\r\n'
 NOT_FOUND = b'HTTP/1.1 404 Not Found\r\n\r\n'
 
 def build_response(content : str) -> bytes : 
-    text = content.split('/')
-    content_length = len(text[-1])
-    text = text[-1].encode()
+    text = content[6:]
+    content_length = len(text)
+    text = text.encode()
     content_length = f'Content-Length: {content_length}\r\n'.encode()
     message = OK + b'Content-Type: text/plain\r\n' + content_length +  text + b'\r\n'
     return message
