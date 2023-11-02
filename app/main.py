@@ -28,7 +28,6 @@ def main():
             conn.send(OK)
         elif len(first_line) == 3 and '/echo' in first_line[1] :
             message = build_response(first_line[1]) 
-            print(message.decode())
             conn.send(message)
         else : 
             conn.send(NOT_FOUND)
