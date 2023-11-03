@@ -77,10 +77,10 @@ def check_file_exists(directory, filename):
 
 
 def main():
-    if len(sys.argv) < 2 : 
+    if len(sys.argv) < 3 : 
         directory_path = None  
     else : 
-        directory_path = sys.argv[1]
+        directory_path = sys.argv[2]
 
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     server_socket.listen()
