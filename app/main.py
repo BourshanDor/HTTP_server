@@ -21,7 +21,7 @@ def user_agent(lines : List[str]) :
             content = line.split()
             return  content[-1]
 
-def send_to_client(conn : socket) : 
+def send_to_client(conn : socket, addr) : 
     with conn : 
     
         data = conn.recv(1024)
