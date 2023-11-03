@@ -71,9 +71,9 @@ def send_to_client(conn : socket, addr, directory_path) :
             file_name = file_name[7:]
             print('Im here')
             path = os.path.join(directory_path, file_name)
-            content = ''
-            print(data)
-            with open(path, 'w') as file:
+            content = lines[-1]
+            print(content)
+            with open(path, 'wb') as file:
                 for i in range(1, len(lines)) : 
                     print('Im here')
                     content += file.write(lines[i]).decode()
