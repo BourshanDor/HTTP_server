@@ -47,7 +47,9 @@ def send_to_client(conn : socket, addr, directory_path) :
         elif len(first_line) == 3 and '/user-agent' == first_line[1] :
             content = user_agent(lines)
             message = build_response(content,'text/plain') 
+
         elif len(first_line) == 3 and '/files' in first_line[1] and directory_path is not None: 
+            print ('Im here')
             file_name = first_line[1] 
             file_name = file_name[7:]
             real_file = check_file_exists(directory_path, file_name)
@@ -57,7 +59,7 @@ def send_to_client(conn : socket, addr, directory_path) :
                     content = file.read().decode()
                     message = build_response(content,'application/octet-stream')
             else : 
-                message = OK + END
+                message = NOT_FOUND + END
 
 
         else : 
