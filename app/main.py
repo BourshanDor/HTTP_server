@@ -54,7 +54,7 @@ def main():
     while True : 
         conn, addr = server_socket.accept() 
         threading.Thread(
-            target= send_to_client, args=(conn)
+            target= send_to_client, args=(conn, addr)
         ).start()
 
 
