@@ -7,7 +7,7 @@ END = b'\r\n'
 
 def build_response(content : str) -> bytes : 
     # text = content[6:]
-    content_length = len(text)
+    content_length = len(content)
     text = content.encode()
     content_length = f'Content-Length: {content_length}\r\n\r\n'.encode()
     message = OK + b'Content-Type: text/plain\r\n' + content_length +  text + END
@@ -28,7 +28,9 @@ def main():
         if len(first_line) == 3 and first_line[1] == '/' : 
             conn.send(OK + END)
         elif len(first_line) == 3 and '/echo' in first_line[1] :
-            message = build_response((first_line[1])[6:]) 
+            content =first_line[1]
+            content = content[6:]
+            message = build_response(content) 
             conn.send(message)
         else : 
             conn.send(NOT_FOUND + END)
