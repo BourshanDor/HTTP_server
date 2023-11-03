@@ -53,12 +53,15 @@ def send_to_client(conn : socket, addr, directory_path) :
             file_name = first_line[1] 
             file_name = file_name[7:]
             real_file = check_file_exists(directory_path, file_name)
+
             if real_file : 
+                print ('Im here')
                 path = os.path.join(directory_path, file_name)
                 with open(path, 'rb') as file:
                     content = file.read().decode()
                     message = build_response(content,'application/octet-stream')
             else : 
+                print ('Im here 1')
                 message = NOT_FOUND + END
 
 
