@@ -29,8 +29,10 @@ def main():
         while True : 
             
             data = conn.recv(1024)
+            if not data:
+                break
             if b'HTTP' not in data : 
-                return  
+                break  
             lines = data.decode("utf-8").splitlines()
             first_line = lines[0].split()
             if len(first_line) == 3 and first_line[1] == '/' : 
