@@ -53,6 +53,7 @@ def main():
                     message = NOT_FOUND + END
 
                 conn.send(message)
+                conn.close()
 
 if __name__ == "__main__":
     main()
