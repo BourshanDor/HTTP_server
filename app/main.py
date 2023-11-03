@@ -72,6 +72,7 @@ def send_to_client(conn : socket, addr, directory_path) :
             print('Im here')
             path = os.path.join(directory_path, file_name)
             content = ''
+            print(data)
             with open(path, 'w') as file:
                 for i in range(1, len(lines)) : 
                     print('Im here')
