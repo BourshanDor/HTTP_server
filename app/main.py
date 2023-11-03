@@ -52,6 +52,7 @@ def send_to_client(conn : socket, addr, directory_path) :
             print ('Im here')
             file_name = first_line[1] 
             file_name = file_name[7:]
+            print(f'{directory_path} and {file_name}')
             real_file = check_file_exists(directory_path, file_name)
 
             if real_file : 
