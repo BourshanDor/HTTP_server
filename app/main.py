@@ -50,7 +50,7 @@ def main():
             else : 
                 message = NOT_FOUND + END
 
-            conn.send(message)
+            conn.sendall(message)
 
 if __name__ == "__main__":
     main()
