@@ -75,7 +75,7 @@ def send_to_client(conn : socket, addr, directory_path) :
             with open(path, 'w') as file:
                     file.write(content)
                 
-            message = build_response(content,'application/octet-stream','GET')
+            message = build_response(content,'application/octet-stream','POST')
     
         else : 
             message = NOT_FOUND + END
