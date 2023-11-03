@@ -8,7 +8,6 @@ END = b'\r\n'
 
 
 def build_response(content : str) -> bytes : 
-    # text = content[6:]
     content_length = len(content)
     text = content.encode()
     content_length = f'Content-Length: {content_length}\r\n\r\n'.encode()
@@ -27,28 +26,29 @@ def main():
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
     conn, addr = server_socket.accept() 
     with conn : 
-        
-        data = conn.recv(1024)
-        if b'HTTP' not in data : 
-            return  
-        lines = data.decode("utf-8").splitlines()
-        first_line = lines[0].split()
-        if len(first_line) == 3 and first_line[1] == '/' : 
-            message = OK + END
+        while True : 
             
-        elif len(first_line) == 3 and '/echo' in first_line[1] :
-            content = first_line[1]
-            content = content[6:]
-            message = build_response(content) 
-            
-        elif len(first_line) == 3 and '/user-agent' == first_line[1] :
-            content = user_agent(lines)
-            message = build_response(content) 
+            data = conn.recv(1024)
+            if b'HTTP' not in data : 
+                return  
+            lines = data.decode("utf-8").splitlines()
+            first_line = lines[0].split()
+            if len(first_line) == 3 and first_line[1] == '/' : 
+                message = OK + END
+                
+            elif len(first_line) == 3 and '/echo' in first_line[1] :
+                content = first_line[1]
+                content = content[6:]
+                message = build_response(content) 
+                
+            elif len(first_line) == 3 and '/user-agent' == first_line[1] :
+                content = user_agent(lines)
+                message = build_response(content) 
 
-        else : 
-            message = NOT_FOUND + END
+            else : 
+                message = NOT_FOUND + END
 
-        conn.send(message)
+            conn.send(message)
 
 if __name__ == "__main__":
     main()
