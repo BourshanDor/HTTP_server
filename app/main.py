@@ -69,12 +69,13 @@ def send_to_client(conn : socket, addr, directory_path) :
         elif len(first_line) == 3 and '/files' in first_line[1] and directory_path is not None and first_line[0] == 'POST' : 
             file_name = first_line[1] 
             file_name = file_name[7:]
-
+            print('Im here')
             path = os.path.join(directory_path, file_name)
             content = ''
             with open(path, 'w') as file:
                 for i in range(1, len(lines)) : 
                     content += file.write(lines[i]).decode()
+                print(content)
                 message = build_response(content,'application/octet-stream','GET')
     
         else : 
