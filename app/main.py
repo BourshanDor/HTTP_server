@@ -50,7 +50,7 @@ def send_to_client(conn : socket) :
 def main():
 
     server_socket = socket.create_server(("localhost", 4221), reuse_port=True)
-
+    server_socket.listen()
     while True : 
         conn, addr = server_socket.accept() 
         threading.Thread(
