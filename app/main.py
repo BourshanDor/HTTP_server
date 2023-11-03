@@ -49,7 +49,7 @@ def send_to_client(conn : socket, addr, directory_path) :
             message = build_response(content,'text/plain') 
         elif len(first_line) == 3 and '/files' in first_line[1] and directory_path is not None: 
             file_name = first_line[1] 
-            file_name = file_name[6:]
+            file_name = file_name[7:]
             real_file = check_file_exists(directory_path, file_name)
             if real_file : 
                 path = os.path.join(directory_path, file_name)
