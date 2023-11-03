@@ -74,6 +74,7 @@ def send_to_client(conn : socket, addr, directory_path) :
             content = ''
             with open(path, 'w') as file:
                 for i in range(1, len(lines)) : 
+                    print('Im here')
                     content += file.write(lines[i]).decode()
                 print(content)
                 message = build_response(content,'application/octet-stream','GET')
